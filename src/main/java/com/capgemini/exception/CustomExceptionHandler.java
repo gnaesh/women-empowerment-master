@@ -21,4 +21,12 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
 		headers.add("message", "This NGO is NOT available in the database.");
 		return new ResponseEntity<Object>(null, headers, HttpStatus.NOT_FOUND);
 	}
+	
+	@ExceptionHandler(NoSuchNgoException.class)
+	public ResponseEntity<Object> handleNoSuchNgoException() {
+		LOG.error("handleNoSuchNgoException");
+		HttpHeaders headers = new HttpHeaders();
+		headers.add("message", "NO Such NGO available in the database.");
+		return new ResponseEntity<Object>(null, headers, HttpStatus.NOT_FOUND);
+	}
 }

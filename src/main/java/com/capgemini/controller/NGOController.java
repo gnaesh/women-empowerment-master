@@ -29,9 +29,10 @@ public class NGOController {
 	private static final Logger LOG = LoggerFactory.getLogger(NGOController.class);
 	
 // Get all NGO //
+//	http://localhost:8082/getallngo
 	@GetMapping("/getallngo")
 	public ResponseEntity<List<NGO>> getallngos() {
-		LOG.info("Controller AllNGO"); // in normal block
+		LOG.info("Controller getallngos"); // in normal block
 		HttpHeaders headers = new HttpHeaders();
 		headers.add("message", "This NGO avaliable in Database.");
 		ResponseEntity<List<NGO>> response = new ResponseEntity<List<NGO>>(ingoService.viewAllNGO(), headers, HttpStatus.CREATED);
@@ -41,6 +42,7 @@ public class NGOController {
 //----------------------------------------------------------------------------------------------------------------------------------------
 	
 //	Add NGO //
+//	http://localhost:8082/addngo
 	@PostMapping("/addngo")
 	public ResponseEntity<NGO> addngo(@RequestBody NGO ngo) {
 		LOG.info("Controller addngo");
@@ -53,6 +55,7 @@ public class NGOController {
 	//----------------------------------------------------------------------------------------------------------------------------------------
 	
 //	Update NGO  //
+//	http://localhost:8082/updatengo
 	@PutMapping("/updatengo")
 	public ResponseEntity<NGO> updateNgo(@RequestBody NGO ngo) {
 		LOG.info("Controller updateNgo");
@@ -65,9 +68,10 @@ public class NGOController {
 //----------------------------------------------------------------------------------------------------------------------------------------
 	
 //	Delete NGO by NGOID //
+//	http://localhost:8082/deletengobyngoid/ngoid
 	@DeleteMapping("/deletengobyngoid/{ngoid}")
 	public ResponseEntity<NGO> deleteNgoByNgoId(@PathVariable(name = "ngoid") Integer ngoId) {
-		LOG.info("deleteNgoByNgoId");
+		LOG.info("Controller deleteNgoByNgoId");
 		NGO ngo = ingoService.deleteNGO(ngoId);
 		HttpHeaders headers = new HttpHeaders();
 		headers.add("message", "NGO deleted successfully.");
@@ -78,9 +82,10 @@ public class NGOController {
 //----------------------------------------------------------------------------------------------------------------------------------------	
 	
 //	Get NGO by NGOID //
+//	http://localhost:8082/getngobyngoid/ngoid
 	@GetMapping("/getbyngoid/{ngoid}")
 	public ResponseEntity<NGO> getNgoByngoId(@PathVariable(name = "ngoid") Integer ngoId) {
-		LOG.info("Controller getNgoById");	
+		LOG.info("Controller getNgoByngoId");	
 		NGO ngo = ingoService.viewNGO(ngoId);// line	
 		HttpHeaders headers = new HttpHeaders();
 		headers.add("message", "NGO is found by Ngoid.");	
@@ -90,7 +95,9 @@ public class NGOController {
 	
 //----------------------------------------------------------------------------------------------------------------------------------------
 	
-	@GetMapping("getNGOByMotive/{ngomotive}")
+//	Get NGO By Motive
+//	http://localhost:8082/getmgobymotive/ngomotive
+	@GetMapping("getmgobymotive/{ngomotive}")
 	public ResponseEntity<List<NGO>> getNGOByMotive(@PathVariable(name="ngomotive")String ngoMotive){
 		LOG.info("Controller getNgoByMotive");
 		List<NGO> ngo = ingoService.viewNGOByMotive(ngoMotive);// line	
@@ -103,12 +110,14 @@ public class NGOController {
 
 //----------------------------------------------------------------------------------------------------------------------------------------	
 	
-	@GetMapping("getNGOByLocation/{ngolocation}")
+//	Get Ngo By Location
+//	http://localhost:8082/getmgobylocatio/ngolocation
+	@GetMapping("getngobylocation/{ngolocation}")
 	public ResponseEntity<List<NGO>> getNGOByLocation(@PathVariable(name="ngolocation")String ngoLocation){
 		LOG.info("Controller getNgoByLocation");
 		List<NGO> ngo = ingoService.viewNGOByLocation(ngoLocation);// line
 		HttpHeaders headers = new HttpHeaders();
-		headers.add("message", "NGO is found by Location.");	
+		headers.add("message", "NGO is found at \"" +ngoLocation+ "\"Location.");	
 		ResponseEntity<List<NGO>> response= new ResponseEntity<List<NGO>>(ngo,headers,HttpStatus.OK);
 	return response;
 }

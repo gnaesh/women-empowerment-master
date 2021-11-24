@@ -26,7 +26,7 @@ public class NGOService implements INGOService{
 @Override
 public NGO deleteNGO(int ngoId) {
 	// TODO Auto-generated method stub
-	LOG.info("deleteNgoByNgoId");
+	LOG.info("Service deleteNgoByNgoId");
 	Optional<NGO> ngoOpt = ingoRepository.findById(ngoId);
 	if (ngoOpt.isPresent()) {
 		ingoRepository.deleteById(ngoId);
@@ -54,6 +54,7 @@ public NGO addNGO(NGO ngo) {
 
 @Override
 public NGO updateNGO(NGO ngo) {
+	LOG.info("Service updateNgoByNgoId");
 	if (ingoRepository.existsById(ngo.getNgoId())) {
 		return ingoRepository.save(ngo);
 	} else {
@@ -65,7 +66,7 @@ public NGO updateNGO(NGO ngo) {
 
 @Override
 public NGO viewNGO(int ngoId) {
-	LOG.info("Service getAllNGO");
+	LOG.info("Service getAllNGOById");
 	if(ingoRepository.existsById(ngoId)) {
 		return ingoRepository.findById(ngoId).get();
 	}
@@ -79,10 +80,10 @@ public NGO viewNGO(int ngoId) {
 public List<NGO> viewAllNGO() {
 	List<NGO> list= ingoRepository.findAll();
 	if(!list.isEmpty()) {
-		LOG.info("View All NGO");
+		LOG.info("Service getAllNGO");
 		return list;
 	}
-	LOG.error("No Ngo present");
+	LOG.error("Service NoNgopresent");
 	throw new NoSuchNgoException("No Ngo present");
 }
 
@@ -90,24 +91,28 @@ public List<NGO> viewAllNGO() {
 
 @Override
 public List<NGO> viewNGOByMotive(String motive) {
+	LOG.info("Service viewNGOByMotive");
 	List<NGO> list = ingoRepository.findByNgoMotive(motive);
 	if(!list.isEmpty()) {
-		LOG.info("viewNGOByMotive");
+		return list;
+	}else {
+		throw new NoSuchNgoException("No Ngo Motive is present in database");
 	}
-	LOG.error("No Ngo Motive present");
-	throw new NoSuchNgoException("No Ngo Motive is present in database");
+	
 }
 
 //------------------------------------------------------------------------------------
 
 @Override
 public List<NGO> viewNGOByLocation(String location) {
+	LOG.info("Service viewNGOByLocation");
 	List<NGO> list = ingoRepository.findByNgoLocation(location);
 	if(!list.isEmpty()) {
-		LOG.info("viewNGOByLocation");
+		return list;
 	}
-	LOG.info("No Ngo Location present");
-	throw new NoSuchNgoException("No Ngo present at that Location");
+	else {
+		throw new NoSuchNgoException("No NGO present at \"" +location+ "\" Location");	
+	}
 }	
 }
 
