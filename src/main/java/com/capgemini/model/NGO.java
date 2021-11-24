@@ -15,7 +15,7 @@ public class NGO {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer ngoId;
 	
-	@Column
+	@Column(unique = true)
 	private String ngoName;
 	
 	@Column
