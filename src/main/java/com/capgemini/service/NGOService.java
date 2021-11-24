@@ -12,8 +12,6 @@ import com.capgemini.exception.NGONotFoundException;
 import com.capgemini.exception.NoNgoPresentByLocationException;
 import com.capgemini.exception.NoNgoPresentByMotiveException;
 import com.capgemini.exception.NoSuchNgoException;
-import com.capgemini.exception.NotvalidLocationException;
-import com.capgemini.exception.NotvalidMotiveException;
 import com.capgemini.model.NGO;
 import com.capgemini.repository.INGORepository;
 
