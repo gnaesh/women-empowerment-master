@@ -97,7 +97,7 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
 	public ResponseEntity<Object> handleNoNgoPresentByLocationException() {
 		LOG.error("handleNotvalidMotiveException");
 		HttpHeaders headers = new HttpHeaders();
-		headers.add("message", "NGO is not present database with that Motive.");
+		headers.add("message", "NGO is not present database with that Location.");
 		return new ResponseEntity<Object>(null, headers, HttpStatus.NOT_FOUND);
 	}
 	
