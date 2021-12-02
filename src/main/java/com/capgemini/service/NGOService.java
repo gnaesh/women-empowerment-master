@@ -61,8 +61,7 @@ public class NGOService implements INGOService {
 	public NGO addNGO(NGO ngo) {
 		LOG.info("Service addNGO");
 		if (ngo.getNgoName() != null && ngo.getNgoActivities() != null && ngo.getNgoLocation() != null
-				&& ngo.getNgoMotive() != null && ngo.getNgoType() != null && ngo.getDonation() != 0
-				&& ngo.getNgoSize() != 0) {
+				&& ngo.getNgoMotive() != null && ngo.getNgoType() != null) {
 			if (!ingoRepository.existsById(ngo.getNgoId())) {
 
 				String name = ngo.getNgoName();
@@ -99,13 +98,17 @@ public class NGOService implements INGOService {
 						LOG.error("NGO Activites is not in Valid format ");
 						throw new NotvalidActivitesException("Invalid format for Activites" + activites);
 					}
-				} else {
+				}
 					LOG.error("Unable to add NGO");
 					throw new InvalidNgoException("Invalid First Name " + name);
-				}
+				
+			}else {
+				throw new NGOAlreadyExistException("this ");
 			}
 		}
-		return null;
+		throw new NGOAlreadyExistException();
+		
+	
 	}
 
 //------------------------------------------------------------------------------------
